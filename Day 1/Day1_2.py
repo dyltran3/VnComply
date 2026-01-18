@@ -20,7 +20,7 @@ async def download_file(file_name: str, size_mb: int):
 
 async def download_all_files():
     """
-    Tải 3 file tuần tự
+    Tải 3 file tuần tự --> Sync
     
     Files:
     - video.mp4 (10MB)
@@ -33,13 +33,16 @@ async def download_all_files():
     start_time = time.time()
     
     #Your code here
+    await download_file("video.mp4", 10)
+    await download_file("music.mp3", 5)
+    await download_file("document.pdf", 2)
     
     end_time = time.time()
     print(f"Tải tất cả file xong trong {end_time - start_time:.1f} giây.")
     
 async def download_all_async():
     """
-    Tải 3 file đồng thời (nhanh)
+    Tải 3 file đồng thời (nhanh) --> Async
 
     Hint: Dùng asyncio.create_task() và await
     """
@@ -49,6 +52,14 @@ async def download_all_async():
     
     #Your code here
     
+    task1 = asyncio.create_task(download_file("video.mp4",10))
+    task2 = asyncio.create_task(download_file("music.mp3",5))
+    task3 = asyncio.create_task(download_file("document.pdf",2))
+
+    await task1
+    await task2
+    await task3
+
     end_time = time.time()
     print(f"Tải tất cả file xong trong {end_time - start_time:.1f} giây.\n")
     
