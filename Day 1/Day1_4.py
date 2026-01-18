@@ -28,6 +28,12 @@ async def run_with_individual_handling():
     # YOUR CODE HERE
     # Hint: Dùng try-except cho TỪNG await
     
+    #task 1
+    try:
+        result1 = await risky_operation(1, False)
+        print({result1})
+    except Exception as e:
+        print(f"Lỗi ở task 1: {e}")
     pass
 
 async def run_with_gather_handling():
@@ -47,6 +53,18 @@ async def run_with_gather_handling():
     #       )
     # Hint: Kiểm tra từng result xem có phải Exception không
     
+    results = await asyncio.gather(
+        risky_operation(1, False),
+        risky_operation(2, True),
+        risky_operation(3, False),
+        return_exceptions=True
+    )
+    
+    for i, results in enumerate(results, 1):
+        if isinstance(results, Exception):
+            print(f"Lỗi ở task {i}: {results}")
+        else:
+            print(f"{results}")
     pass
 
 # Test
