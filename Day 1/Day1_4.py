@@ -27,8 +27,23 @@ async def run_with_individual_handling():
     
     # YOUR CODE HERE
     # Hint: Dùng try-except cho TỪNG await
-    
-    pass
+    try:
+        result1 = await risky_operation(1, False)
+        print(result1)
+    except ValueError as e:
+        print(f"Error 1: {e}")
+
+    try:
+        result2 = await risky_operation(2, True)
+        print(result2)
+    except ValueError as e:
+        print(f"Error 2: {e}")
+
+    try:
+        result3 = await risky_operation(3, False)
+        print(result3)
+    except ValueError as e:
+        print(f"Error 3: {e}")
 
 async def run_with_gather_handling():
     """
@@ -46,6 +61,12 @@ async def run_with_gather_handling():
     #           return_exceptions=True
     #       )
     # Hint: Kiểm tra từng result xem có phải Exception không
+    results = await asyncio.gather(
+        risky_operation(1, False),
+        risky_operation(2, True),
+        risky_operation(3, False),
+        return_exceptions=True
+    )
     
     pass
 

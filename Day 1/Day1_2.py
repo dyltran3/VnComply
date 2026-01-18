@@ -33,6 +33,10 @@ async def download_all_files():
     start_time = time.time()
     
     #Your code here
+
+    task1 = await download_file("video.mp4", 1)
+    task2 = await download_file("soundclound.mp3", 5) 
+    task3 = await download_file("document.pdf", 2)
     
     end_time = time.time()
     print(f"Tải tất cả file xong trong {end_time - start_time:.1f} giây.")

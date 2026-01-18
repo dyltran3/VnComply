@@ -16,6 +16,11 @@ async def say_hello(name: str,delay:int):
     """
     #Your code here
     # Hint: Sử dụng await asyncio.sleep(delay) 
+    #duckien
+async def say_hello(name, delay):
+    print(f"\nHello {name}")
+    await asyncio.sleep(delay)
+    print(f"\nReady for {name} after {delay} second!")
     
 #Test Function
 async def test_say_hello():

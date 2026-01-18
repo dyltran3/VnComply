@@ -42,6 +42,13 @@ async def fetch_multiple_users_v2():
     print("=== CÁCH 2: gather ===")
     
     # YOUR CODE HERE
+    results = await asyncio.gather(
+        fetch_user(1),
+        fetch_user(2),
+        fetch_user(3)
+    )
+    user1, user2, user3 = results
+
     
     pass
 
