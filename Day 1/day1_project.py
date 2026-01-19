@@ -29,6 +29,7 @@ URLS = [
 ]
 
 async def check_url(session, url: str):
+
     """
     TODO: Kiểm tra 1 URL
     
@@ -45,7 +46,33 @@ async def check_url(session, url: str):
     - Tính thời gian response
     """
     # YOUR CODE HERE
+    start =time.time()
+    try:
+        # (1) mở request bất đồng bộ tới url, timeout 5s
+        async with session.get(url,timeout=5) as response:
+            # (2) lấy status code từ response
+            status=response.status
+            # (3) tính thời gian phản hồi
+            response_time = time.time() - start
+               # (4) trả về kết quả THÀNH CÔNG
+            return {
+                "url": url,
+                "status": status,
+                "response_time": response_time,
+                "error": None
+            }
+    except Exception as e:
+        # (5) tính thời gian phản hồi khi lỗi
+        response_time = time.time() - start
+         # (6) trả về kết quả LỖI (không raise)
+        return {
+            "url": url,
+            "status": None,
+            "response_time": response_time,
+            "error": str(e)
+        }
     pass
+
 
 async def check_all_urls():
     """
@@ -61,6 +88,18 @@ async def check_all_urls():
     
     # YOUR CODE HERE
     
+    #  Tạo ClientSession
+    async with aiohttp.ClientSession() as session:
+         # Tạo list coroutine
+         tasks = [check_url(session, url) for url in URLS]
+        # Chạy đồng thời
+         results= await asyncio.gather(*tasks)
+          # In kết quả
+    for result in results:
+            if result["error"] is None:
+                print(f"{result['url']} Status: {result['status']} | Time : {result['response_time']:.2f}s")
+            else:
+                print(f"{result['url']} | Error: {result['error']} | Time : {result['response_time']:.2f}s")
     end = time.time()
     print(f"\n⏱️  Tổng thời gian: {end - start:.2f}s")
 
