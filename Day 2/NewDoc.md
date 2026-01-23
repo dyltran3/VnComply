@@ -24,7 +24,7 @@ Hệ thống tự động thu thập và phân tích dữ liệu từ website m�
 
 **Khả năng chính:**
 - Quét toàn bộ website theo độ sâu có thể cấu hình (1-5 levels)
-- Tự động phát hiện và phân tích cookie consent banners
+- Tự động phát hiện và phân tích cookie consent banners 
 - Theo dõi tất cả network requests để phát hiện third-party trackers
 - Phát hiện data leakage qua analytics và advertising pixels
 - Chụp screenshots làm bằng chứng cho các vi phạm
